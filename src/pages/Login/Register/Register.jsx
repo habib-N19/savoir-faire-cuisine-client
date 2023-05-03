@@ -1,11 +1,27 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../../../providers/AuthProvider'
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext)
+  const handleRegister = event => {
+    event.preventDefault()
+    const form = event.target
+    const name = form.name.value
+    const email = form.email.value
+    const password = form.password.value
+    console.log(name)
+    createUser(email, password)
+      .then(result => {
+        const createdNewUser = result.user
+        console.log(createdNewUser)
+      })
+      .then(error => console.error(error))
+  }
   return (
     <div className='w-11/12 sm:w-1/3 mx-auto my-10 '>
       <h2 className='text-2xl mb-10 text-center'>Please Register</h2>
-      <form className='mx-auto'>
+      <form onSubmit={handleRegister} className='mx-auto'>
         <div className='form-control w-full max-w-xs'>
           <label className='label mb-3'>
             <span className='label-text text-primary'>What is your name?</span>
@@ -15,7 +31,7 @@ const Register = () => {
             name='name'
             placeholder='Enter your name'
             required
-            className='input input-bordered w-full max-w-xs placeholder-secondary bg-primary'
+            className='input input-bordered w-full max-w-xs placeholder-secondary bg-primary text-secondary'
           />
         </div>
         <div className='form-control w-full max-w-xs'>
@@ -29,7 +45,7 @@ const Register = () => {
             name='url'
             placeholder='enter your image URL'
             required
-            className='input input-bordered w-full max-w-xs pplaceholder-secondary bg-primary'
+            className='input input-bordered w-full max-w-xs placeholder-secondary bg-primary text-secondary'
           />
         </div>
         <div className='form-control w-full max-w-xs'>
@@ -41,7 +57,7 @@ const Register = () => {
             name='email'
             placeholder='enter your Email'
             required
-            className='input input-bordered w-full max-w-xs placeholder-secondary bg-primary'
+            className='input input-bordered w-full max-w-xs placeholder-secondary bg-primary text-secondary'
           />
         </div>
         <div className='form-control w-full max-w-xs'>
@@ -53,7 +69,7 @@ const Register = () => {
             name='password'
             placeholder='create your new password'
             required
-            className='input input-bordered w-full max-w-xs placeholder-secondary bg-primary'
+            className='input input-bordered w-full max-w-xs placeholder-secondary bg-primary text-secondary'
           />
         </div>
         <div className='form-control w-full max-w-xs'>
@@ -67,7 +83,7 @@ const Register = () => {
             name='confirmed-password'
             placeholder='confirm your password'
             required
-            className='input input-bordered w-full max-w-xs placeholder-secondary bg-primary'
+            className='input input-bordered w-full max-w-xs placeholder-secondary bg-primary text-secondary'
           />
         </div>
         <div className='form-control'>
