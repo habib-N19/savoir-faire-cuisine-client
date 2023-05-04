@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { Navigate, createBrowserRouter } from 'react-router-dom'
 import LoginLayout from '../layouts/LoginLayout'
 import Login from '../pages/Login/Login/Login'
 import Register from '../pages/Login/Register/Register'
@@ -12,14 +12,21 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <LoginLayout></LoginLayout>,
-    loader: () => fetch('http://localhost:9000/chefInfos'),
+    // loader: () => fetch('http://localhost:9000/chefInfos'),
     errorElement: <NotFound></NotFound>,
     children: [
       {
-        path: '/',
-        element: <ChefData></ChefData>,
-        loader: () => fetch('http://localhost:9000/chefInfos')
+        path: '/'
+        // element: <Navigate to='/chefData'></Navigate>
+        // element: <ChefData></ChefData>,
+        // loader: () => fetch('http://localhost:9000/chefInfos')
       },
+      //   {
+      //     path: 'chefData/:id',
+      //     element: <ChefData></ChefData>,
+      //     loader: ({ params }) =>
+      //       fetch(`http://localhost:9000/chefInfos/${params.id}`)
+      //   },
       {
         path: '/login',
         element: <Login></Login>
@@ -36,11 +43,12 @@ const router = createBrowserRouter([
   }
   //   {
   //     path: 'chefData',
-  //     element: <MainLayout></MainLayout>,
+  //     element: <ChefData></ChefData>,
+  //     loader: () => fetch('http://localhost:9000/chefInfos'),
   //     children: [
   //       {
   //         path: ':id',
-  //         element: <ChefCard></ChefCard>,
+  //         element: <Card></Card>,
   //         loader: ({ params }) =>
   //           fetch(`http://localhost:9000/chefInfos/${params.id}`)
   //       }
