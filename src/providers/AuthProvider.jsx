@@ -7,7 +7,8 @@ import {
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-  signInWithPopup
+  signInWithPopup,
+  signOut
 } from 'firebase/auth'
 
 export const AuthContext = createContext(null)

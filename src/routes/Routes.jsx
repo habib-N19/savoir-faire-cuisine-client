@@ -9,6 +9,7 @@ import Card from '../pages/Home/ChefCard/Card'
 import NotFound from '../pages/ErrorPage/NotFound'
 import DetailedChefPage from '../pages/DetailedChefPage/DetailedChefPage'
 import PrivateRoutes from './PrivateRoutes'
+import Blog from '../pages/Blogs/Blog'
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <Register></Register>
+      },
+      {
+        path: '/blog',
+        element: <Blog></Blog>
       },
       {
         path: '/terms',
