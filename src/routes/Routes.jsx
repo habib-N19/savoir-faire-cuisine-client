@@ -7,26 +7,25 @@ import MainLayout from '../layouts/MainLayout'
 import ChefData from '../pages/Home/ChefData/ChefData'
 import Card from '../pages/Home/ChefCard/Card'
 import NotFound from '../pages/ErrorPage/NotFound'
+import DetailedChefPage from '../pages/DetailedChefPage/DetailedChefPage'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <LoginLayout></LoginLayout>,
-    // loader: () => fetch('http://localhost:9000/chefInfos'),
     errorElement: <NotFound></NotFound>,
     children: [
       {
-        path: '/'
-        // element: <Navigate to='/chefData'></Navigate>
-        // element: <ChefData></ChefData>,
-        // loader: () => fetch('http://localhost:9000/chefInfos')
+        path: '/',
+        element: <ChefData></ChefData>,
+        loader: () => fetch('http://localhost:9000/chefInfos')
       },
-      //   {
-      //     path: 'chefData/:id',
-      //     element: <ChefData></ChefData>,
-      //     loader: ({ params }) =>
-      //       fetch(`http://localhost:9000/chefInfos/${params.id}`)
-      //   },
+      {
+        path: 'chefData/:id',
+        element: <DetailedChefPage></DetailedChefPage>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:9000/chefInfos/${params.id}`)
+      },
       {
         path: '/login',
         element: <Login></Login>
@@ -41,19 +40,6 @@ const router = createBrowserRouter([
       }
     ]
   }
-  //   {
-  //     path: 'chefData',
-  //     element: <ChefData></ChefData>,
-  //     loader: () => fetch('http://localhost:9000/chefInfos'),
-  //     children: [
-  //       {
-  //         path: ':id',
-  //         element: <Card></Card>,
-  //         loader: ({ params }) =>
-  //           fetch(`http://localhost:9000/chefInfos/${params.id}`)
-  //       }
-  //     ]
-  //   }
 ])
 
 export default router
