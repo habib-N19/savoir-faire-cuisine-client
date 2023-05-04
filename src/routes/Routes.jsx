@@ -8,6 +8,7 @@ import ChefData from '../pages/Home/ChefData/ChefData'
 import Card from '../pages/Home/ChefCard/Card'
 import NotFound from '../pages/ErrorPage/NotFound'
 import DetailedChefPage from '../pages/DetailedChefPage/DetailedChefPage'
+import PrivateRoutes from './PrivateRoutes'
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'chefData/:id',
-        element: <DetailedChefPage></DetailedChefPage>,
+        element: (
+          <PrivateRoutes>
+            <DetailedChefPage></DetailedChefPage>
+          </PrivateRoutes>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:9000/chefInfos/${params.id}`)
       },

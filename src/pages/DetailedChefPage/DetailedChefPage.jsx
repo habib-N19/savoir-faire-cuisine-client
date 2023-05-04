@@ -13,7 +13,7 @@ const DetailedChefPage = id => {
   const detailedChef = useLoaderData()
 
   const handleToast = recipeId => {
-    const recipe = detailedChef.recipes.find(r => r.id === recipeId)
+    const foundRecipe = detailedChef.recipes.find(r => r.id === recipeId)
     if (!favorites.includes(recipeId)) {
       const newFavorites = [...favorites]
       newFavorites.push(recipeId)
@@ -37,40 +37,44 @@ const DetailedChefPage = id => {
           <div>
             <h1 className='text-5xl font-bold'>{name}</h1>
             <p className='py-6'>{description}</p>
-            <p>Likes: {likes}</p>
-            <p>No of recipes: {recipes.length}</p>
-            <p>Years of experience: {years_of_experience}</p>
+            <p className='font-semibold mb-2'>Likes: {likes}</p>
+            <p className='font-semibold mb-2'>
+              No of recipes: {recipes.length}
+            </p>
+            <p className='font-semibold mb-2'>
+              Years of experience: {years_of_experience}
+            </p>
           </div>
         </div>
       </div>
       {/* recipe items */}
       <div className='bg-glass w-11/12 mx-auto'>
         <AutoplaySlider play={true} cancelOnInteraction={false} interval={6000}>
-          {recipes.map(recipe => (
-            <div key={recipe.id}>
+          {recipes.map(r => (
+            <div key={r.id}>
               <div className='card w-full min-h-full my-0 mx-auto bg-primary text-primary-content'>
                 <div className='card-body min-h-full m-0'>
-                  <h2 className='card-title text-center mx-auto text-2xl'>
-                    Recipe Name: {recipe.name}
+                  <h2 className='card-title text-black text-center mx-auto text-2xl'>
+                    Recipe Name: {r.recipe_name}
                   </h2>
                   <div className='grid grid-cols-3 gap-3 p-4 px-10'>
                     <div className='col-span-1'>
-                      {recipe.ingredients.map((ingredient, index) => (
+                      {r.ingredients.map((ingredient, index) => (
                         <ul key={index}>
                           <li>{ingredient}</li>
                         </ul>
                       ))}
                     </div>
-                    <p className='col-span-2'>{recipe.cooking_method}</p>
+                    <p className='col-span-2'>{r.cooking_method}</p>
                   </div>
-                  <p>Ratings: {recipe.rating}</p>
+                  <p>Ratings: {r.rating}</p>
                   <div className='card-actions justify-end'>
                     <button
-                      onClick={() => handleToast(recipe.id)}
+                      onClick={() => handleToast(r.id)}
                       className='btn text-secondary bg-primary'
-                      disabled={favorites.includes(recipe.id)}
+                      disabled={favorites.includes(r.id)}
                     >
-                      {favorites.includes(recipe.id)
+                      {favorites.includes(r.id)
                         ? 'Added to favorites'
                         : 'Add to favorite'}
                     </button>
