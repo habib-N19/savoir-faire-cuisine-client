@@ -6,11 +6,14 @@ import Terms from '../pages/Shared/Terms/Terms'
 import MainLayout from '../layouts/MainLayout'
 import ChefData from '../pages/Home/ChefData/ChefData'
 import Card from '../pages/Home/ChefCard/Card'
+import NotFound from '../pages/ErrorPage/NotFound'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <LoginLayout></LoginLayout>,
+    loader: () => fetch('http://localhost:9000/chefInfos'),
+    errorElement: <NotFound></NotFound>,
     children: [
       {
         path: '/',
