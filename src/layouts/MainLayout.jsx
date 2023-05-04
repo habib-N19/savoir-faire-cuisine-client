@@ -6,7 +6,6 @@ import Home from '../pages/Home/Home/Home'
 const MainLayout = () => {
   return (
     <>
-      <NavigationBar></NavigationBar>
       <Outlet></Outlet>
       <Home></Home>
     </>

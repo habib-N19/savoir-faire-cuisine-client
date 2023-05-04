@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <ChefData></ChefData>,
+        element: <MainLayout></MainLayout>,
         loader: () => fetch('http://localhost:9000/chefInfos')
       },
       {
