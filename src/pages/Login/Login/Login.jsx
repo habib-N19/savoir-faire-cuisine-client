@@ -33,6 +33,16 @@ const Login = () => {
   //   google sign in
   const handleGoogleSignIn = () => {
     googleSignIn()
+      .then(res => {
+        const loggedUser = res.user
+        navigate(from, { replace: true })
+        toast.success('Login successful')
+      })
+      .catch(error => {
+        console.error(error)
+        setError(error.code)
+        toast.error(error.message)
+      })
   }
   //   github sign in
   const handleGithubSignIn = () => {
@@ -40,8 +50,14 @@ const Login = () => {
       .then(result => {
         const loggedUser = result.user
         console.log(loggedUser)
+        navigate(from, { replace: true })
+        toast.success('Login successful')
       })
-      .catch(error => console.error(error))
+      .catch(error => {
+        console.error(error)
+        setError(error.code)
+        toast.error(error.message)
+      })
   }
   return (
     <div className='bg-base-100 w-9/12 sm:w-1/3 mx-auto'>
