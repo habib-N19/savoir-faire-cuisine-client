@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { AuthContext } from '../../../providers/AuthProvider'
 
 const NavigationBar = () => {
@@ -17,26 +17,44 @@ const NavigationBar = () => {
         </Link>
       </div>
       <div className='flex-1'>
-        <Link to='/' className='btn btn-ghost normal-case font-bold text-xl'>
+        <NavLink
+          to='/'
+          className={({ isActive }) =>
+            isActive
+              ? 'btn btn-primary normal-case font-bold text-xl tracking-wide transition-colors duration-300'
+              : 'btn btn-ghost normal-case font-semibold tracking-wide text-xl'
+          }
+        >
           Home
-        </Link>
+        </NavLink>
       </div>
       <div className='flex-1'>
-        <Link
+        <NavLink
           to='/blog'
-          className='btn btn-ghost normal-case font-bold text-xl'
+          className={({ isActive }) =>
+            isActive
+              ? 'btn btn-primary normal-case font-bold text-xl tracking-wide transition-colors duration-300'
+              : 'btn btn-ghost normal-case font-semibold tracking-wide text-xl'
+          }
         >
           Blog
-        </Link>
+        </NavLink>
       </div>
       {user ? (
         <div onClick={handleLogOut} className='btn btn-ghost'>
           Logout
         </div>
       ) : (
-        <Link to='/login'>
-          <div className='btn btn-ghost'>Login</div>
-        </Link>
+        <NavLink
+          to='/login'
+          className={({ isActive }) =>
+            isActive
+              ? 'btn btn-primary normal-case font-bold text-xl tracking-wide transition-colors duration-300'
+              : 'btn btn-ghost normal-case font-semibold tracking-wide text-xl'
+          }
+        >
+          Login
+        </NavLink>
       )}
 
       <div className=' w-10 rounded-full'>
