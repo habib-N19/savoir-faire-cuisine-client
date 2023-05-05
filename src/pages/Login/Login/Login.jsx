@@ -1,11 +1,16 @@
 import React, { useContext } from 'react'
-import { Link, Navigate, useLocation } from 'react-router-dom'
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../../providers/AuthProvider'
 import { FcGoogle } from 'react-icons/fc'
 import { FaGithubSquare } from 'react-icons/fa'
+import { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Login = () => {
   const { signIn, googleSignIn, githubSignIn } = useContext(AuthContext)
+  const [error1, setError] = useState(null)
+  const navigate = useNavigate()
   const location = useLocation()
   const from = location.state?.from.pathname || '/'
   const handleLogin = event => {
@@ -16,9 +21,14 @@ const Login = () => {
     signIn(email, password)
       .then(result => {
         const loggedUser = result.user
-        Navigate(from, { replace: true })
+        navigate(from, { replace: true })
+        toast.success('Login successful')
       })
-      .catch(error => console.error(error))
+      .catch(error => {
+        console.log(error.code)
+        setError(error.code)
+        toast.error(error.message)
+      })
   }
   //   google sign in
   const handleGoogleSignIn = () => {
@@ -87,6 +97,7 @@ const Login = () => {
           </div>
         </div>
       </form>
+      <ToastContainer></ToastContainer>
     </div>
   )
 }

@@ -1,22 +1,44 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../../providers/AuthProvider'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext)
+  const { createUser, logOut } = useContext(AuthContext)
+  const navigate = useNavigate()
+  // making accepting terms
+  const [isAccepted, setIsAccepted] = useState(false)
+  // displaying errors in register
+  const [error, setError] = useState(null)
   const handleRegister = event => {
     event.preventDefault()
     const form = event.target
     const name = form.name.value
     const email = form.email.value
     const password = form.password.value
-    console.log(name)
-    createUser(email, password)
-      .then(result => {
-        const createdNewUser = result.user
-        console.log(createdNewUser)
-      })
-      .catch(error => console.error(error))
+    const confirmed_password = form.confirmed_password.value
+    if (password.length < 6 || password !== confirmed_password) {
+      setError('Password do not match or Less that 6 character')
+      toast(error)
+      return
+    } else {
+      createUser(email, password)
+        .then(result => {
+          const createdNewUser = result.user
+          console.log(createdNewUser)
+          toast.success(`Registration Successful! Congratulation ${name}`)
+          logOut()
+          navigate('/login')
+        })
+        .catch(error => {
+          setError(error)
+          toast.error(error.message)
+        })
+    }
+  }
+  const handleCheckBox = event => {
+    setIsAccepted(event.target.checked)
   }
   return (
     <div className='w-11/12 sm:w-1/3 mx-auto my-10 '>
@@ -53,7 +75,7 @@ const Register = () => {
           <input
             type='password'
             name='password'
-            placeholder='Create your new password'
+            placeholder='Create your password'
             required
             className='input input-bordered w-full max-w-xs placeholder-secondary bg-primary text-secondary'
           />
@@ -61,7 +83,7 @@ const Register = () => {
         <div className='form-control w-full max-w-xs mb-3'>
           <input
             type='password'
-            name='confirmed-password'
+            name='confirmed_password'
             placeholder='Confirm your password'
             required
             className='input input-bordered w-full max-w-xs placeholder-secondary bg-primary text-secondary'
@@ -70,6 +92,7 @@ const Register = () => {
         <div className='form-control flex flex-row my-2'>
           <div>
             <input
+              onClick={handleCheckBox}
               type='checkbox'
               className='checkbox cursor-pointer mr-2 bg-primary'
             />
@@ -80,6 +103,7 @@ const Register = () => {
         </div>
         <input
           type='submit'
+          disabled={!isAccepted}
           value='Register'
           className='btn btn-outline my-4 '
         />

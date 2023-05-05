@@ -10,6 +10,7 @@ import NotFound from '../pages/ErrorPage/NotFound'
 import DetailedChefPage from '../pages/DetailedChefPage/DetailedChefPage'
 import PrivateRoutes from './PrivateRoutes'
 import Blog from '../pages/Blogs/Blog'
+import Loading from '../pages/Shared/Loading/Loading'
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <MainLayout></MainLayout>,
-        loader: () => fetch('https://savoir-faire-server.vercel.app/chefInfos')
+        loader: () => fetch('http://localhost:9000/chefInfos')
       },
       {
         path: 'chefData/:id',
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`https://savoir-faire-server.vercel.app/chefInfos/${params.id}`)
+          fetch(`http://localhost:9000/chefInfos/${params.id}`)
       },
       {
         path: '/login',
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: '/blog',
         element: <Blog></Blog>
+      },
+      {
+        path: '/loading',
+        element: <Loading></Loading>
       },
       {
         path: '/terms',
