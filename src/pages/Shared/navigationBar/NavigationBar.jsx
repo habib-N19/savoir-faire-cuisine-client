@@ -10,9 +10,12 @@ const NavigationBar = () => {
       .catch(error => console.error(error))
   }
   return (
-    <div className='navbar bg-base-100'>
+    <div className='navbar bg-base-100 flex-col sm:flex-row'>
       <div className='flex-1'>
-        <Link to='/' className='btn btn-ghost normal-case font-bold text-xl'>
+        <Link
+          to='/'
+          className='btn btn-ghost normal-case animate-pulse font-bold text-xl'
+        >
           Savoir Faire Cuisine
         </Link>
       </div>
@@ -58,7 +61,12 @@ const NavigationBar = () => {
       )}
 
       <div className=' w-10 rounded-full'>
-        <img src={user?.image} alt='' />
+        <img
+          src={user?.photoURL}
+          title={user?.displayName}
+          className='rounded-full'
+          alt=''
+        />
       </div>
     </div>
   )

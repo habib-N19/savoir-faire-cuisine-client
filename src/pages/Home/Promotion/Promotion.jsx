@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 const Promotion = () => {
   return (
     <div className='hero min-h-screen bg-base-200'>
-      <div className='hero-content flex-col lg:flex-row-reverse'>
+      <div className='hero-content w-11/12 mx-auto flex-col lg:flex-row-reverse'>
         <div>
-          <h1 className='text-5xl font-bold'>Box Office News!</h1>
+          <h1 className='text-5xl font-bold mb-4'>Grab your deal!</h1>
           <p className='py-6'>
             "Enjoy 35% on your next meal when you dine with us! Use promo code
             [66FEBSS] when making your reservation or placing your order online

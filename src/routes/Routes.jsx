@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <MainLayout></MainLayout>,
-        loader: () => fetch('http://localhost:9000/chefInfos')
+        loader: () => fetch('https://savoir-faire-cuisine.web.app')
       },
       {
         path: 'chefData/:id',
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:9000/chefInfos/${params.id}`)
+          fetch(`https://savoir-faire-cuisine.web.app/${params.id}`)
       },
       {
         path: '/login',

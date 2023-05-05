@@ -1,8 +1,16 @@
 import React from 'react'
+import { FaAngleDoubleDown } from 'react-icons/fa'
+
 const Feedback = () => {
   return (
     <div className='card mx-auto my-16'>
-      <h1 className='mx-auto text-3xl mb-6'>Customer Feedbacks</h1>
+      <div className='flex items-center justify-center'>
+        <h1 className='text-3xl mb-6'>Customer Feedbacks</h1>
+        <svg className='animate-bounce w-10 h-6 ml-4'>
+          <FaAngleDoubleDown />
+        </svg>
+      </div>
+
       <div className='h-[200px] w-11/12 mx-auto carousel bg-slate-600 px-6  text-white  carousel-vertical rounded-box'>
         <div className='carousel-item h-full pt-12'>
           <p>
@@ -46,6 +54,7 @@ const Feedback = () => {
           </p>
         </div>
       </div>
+      {/* <svg className='animate-bounce w-6 h-6'></svg> */}
     </div>
   )
 }

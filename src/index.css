@@ -6,19 +6,42 @@
 /* * {
   border: 1px solid black;
 } */
-.aws_slid {
+.bannerHeader {
+  position: relative;
+  top: 50%;
+  width: 24em;
+  margin: 0 auto;
+  border-right: 2px solid rgba(255, 255, 255, .75);
+  font-size: 180%;
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  transform: translateY(-50%);
+}
 
-  --slider-height-percentage: 33%;
-  --slider-transition-duration: 508ms;
-  --organic-arrow-thickness: 1px;
-  --organic-arrow-border-radius: 4px;
-  --organic-arrow-height: 30px;
-  --organic-arrow-color: #ffffff;
-  --control-button-width: 8%;
-  --control-button-height: 29%;
-  --control-button-background: transparent;
-  --control-bullet-color: #000000;
-  --control-bullet-active-color: #ffffff;
-  --loader-bar-color: #851515;
-  --loader-bar-height: 4px;
+/* Animation */
+.typewriterHeader {
+  animation: typewriter 1.3s steps(44) 1s 1 normal both,
+    blinkTextCursor 700ms steps(44) infinite normal;
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 6em;
+  }
+}
+
+@keyframes blinkTextCursor {
+  from {
+    border-right-color: rgba(255, 255, 255, .75);
+  }
+
+  to {
+    border-right-color: transparent;
+  }
 }

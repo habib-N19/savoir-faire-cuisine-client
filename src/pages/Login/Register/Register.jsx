@@ -41,9 +41,12 @@ const Register = () => {
     setIsAccepted(event.target.checked)
   }
   return (
-    <div className='w-11/12 sm:w-1/3 mx-auto my-10 '>
+    <div className='w-11/12 sm:w-1/3  mx-auto my-10 '>
       <h2 className='text-2xl mb-10 text-center'>Please Register</h2>
-      <form onSubmit={handleRegister} className='mx-auto'>
+      <form
+        onSubmit={handleRegister}
+        className='mx-auto flex flex-col justify-center items-center'
+      >
         <div className='form-control w-full max-w-xs mb-3'>
           <input
             type='text'
@@ -101,12 +104,14 @@ const Register = () => {
             Accept <Link to='/terms'>Terms and Conditions</Link>
           </div>
         </div>
-        <input
-          type='submit'
-          disabled={!isAccepted}
-          value='Register'
-          className='btn btn-outline my-4 '
-        />
+        <div className='form-control flex flex-row my-2 w-11/12 mx-auto'>
+          <input
+            type='submit'
+            disabled={!isAccepted}
+            value='Register'
+            className='btn btn-outline my-2 w-10/12 mx-auto'
+          />
+        </div>
         <div>
           <span>
             Already have an account? Please <Link to='/login'>Login</Link>
